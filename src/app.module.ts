@@ -12,6 +12,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { MessageWsModule } from './message-ws/message-ws.module';
+import { PrinterModule } from './printer/printer.module';
+import { BasicReportsModule } from './basic-reports/basic-reports.module';
 
 
 @Module({
@@ -39,6 +41,8 @@ import { MessageWsModule } from './message-ws/message-ws.module';
     FilesModule,
     AuthModule,
     MessageWsModule,
+    PrinterModule,
+    BasicReportsModule,
   ],
   controllers: [ SybaseController],
   providers: [],
