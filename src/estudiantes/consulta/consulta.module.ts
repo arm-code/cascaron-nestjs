@@ -7,7 +7,8 @@ import { SybaseModule } from 'src/database/sybase/sybase.module';
 @Module({
   imports: [ SybaseModule ],
   controllers: [ConsultaController],
-  providers: [ConsultaService],
+  providers: [ConsultaService], 
+  exports: [ConsultaService] // Exporting the service to be used in other modules
   
 })
 export class ConsultaModule {}

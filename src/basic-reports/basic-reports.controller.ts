@@ -22,7 +22,7 @@ export class BasicReportsController {
     @Res() response: Response,
     @Param('matricula') matricula: string,
   ) {
-    const pdfDoc = this.basicReportsService.constanciaEstudianteLogotipos( matricula );
+    const pdfDoc = await this.basicReportsService.constanciaEstudianteLogotipos( matricula );
     response.setHeader('Content-Type', 'application/pdf');
     pdfDoc.info.Title = 'Hola mundo';
     pdfDoc.pipe(response);

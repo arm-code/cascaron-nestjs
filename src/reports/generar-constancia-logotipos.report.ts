@@ -34,19 +34,17 @@ const logoRight: Content = {
 
 // }
 
-export const getConstanciaConLogotipos = () => {
+interface Student {
+  Nombre: string;
+  Matricula: string;
+  Clave_Asesoria: string;
+  Clave_Area: string;
+  Sexo: string;
+}
+
+export const getConstanciaConLogotipos = ( student: Student) : TDocumentDefinitions => {
   
-  const { studentName, studentID, program, institution, date } = {
-    studentName: 'Juan Pérez',
-    studentID: '123456789',
-    program: 'Ingeniería en Sistemas',
-    institution: 'Instituto Tecnológico de Ejemplo',
-    date: new Date().toLocaleDateString('es-MX', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }),
-  };
+  const { Nombre, Matricula, Clave_Asesoria, Clave_Area, Sexo } = student;
 
   const docDefinition: TDocumentDefinitions = {
     
@@ -71,11 +69,11 @@ export const getConstanciaConLogotipos = () => {
       {
         text: [
           'Por medio de la presente, se hace constar que el(la) estudiante ',
-          { text: studentName, bold: true },
+          { text: Nombre, bold: true },
           ', con número de identificación ',
-          { text: studentID, bold: true },
-          ', está inscrito(a) en el programa de estudios ',
-          { text: program, bold: true },
+          { text: Matricula, bold: true },
+          ', está inscrito(a) en el Clave_Asesoriaa de estudios ',
+          { text: Clave_Asesoria, bold: true },
           ' en esta institución.',
         ],
         margin: [0, 10, 0, 10],
@@ -91,10 +89,10 @@ export const getConstanciaConLogotipos = () => {
         table: {
           widths: ['30%', '70%'],
           body: [
-            [{ text: 'Nombre:', bold: true }, studentName],
-            [{ text: 'Número de ID:', bold: true }, studentID],
-            [{ text: 'Programa:', bold: true }, program],
-            [{ text: 'Fecha de emisión:', bold: true }, date],
+            [{ text: 'Nombre:', bold: true }, Nombre],
+            [{ text: 'Número de ID:', bold: true }, Matricula],
+            [{ text: 'Clave_Asesoria:', bold: true }, Clave_Asesoria],
+            [{ text: 'Fecha de emisión:', bold: true }, Sexo],
           ],
         },
         margin: [0, 5, 0, 10],
@@ -106,7 +104,7 @@ export const getConstanciaConLogotipos = () => {
       },
 
       { text: 'Atentamente,', margin: [0, 30, 0, 5] },
-      { text: institution, bold: true },
+      { text: Clave_Area, bold: true },
       { text: '_____________________________', margin: [0, 20, 0, 5] },
       { text: 'Firma del responsable', italics: true },
     ],    
