@@ -1,37 +1,54 @@
 
-import { Content, TDocumentDefinitions } from "pdfmake/interfaces";
+import { Content, StyleDictionary, TDocumentDefinitions } from "pdfmake/interfaces";
+import { headerSection } from "./sections/header.section";
 
 
 
 const logoLeft: Content = {
-    image: 'src/assets/images/spayt.jpg',
-    width: 150
+    image: 'src/assets/images/sed.png',
+    width: 150,    
+    alignment: 'left'
 }
 
 const logoRight: Content = {
-    image: 'src/assets/images/spayt.jpg',
-    width: 150
+    image: 'src/assets/images/spayt-png.png',
+    width: 150,
+    alignment: 'left'
+    
 }
 
+// const styles: StyleDictionary = {
+//   header: {
+//     fontSize: 16,
+//     bold: true,
+//     alignment: 'center',
+//     margin: [0, 20, 0, 0],
+//   },  
+//   subheader: { 
+//     fontSize: 14, 
+//     bold: true 
+//   },
+//   bold: { 
+//     bold: true 
+//   },
+
+// }
 
 export const getConstanciaConLogotipos = (body: any) => {
+  
   const { studentName, studentID, program, institution, date } = body;
-  const docDefinition: TDocumentDefinitions = {
-    content: [
-      // Encabezado con imágenes a la izquierda y derecha
-      {
-        columns: [
-           logoLeft,
-          {
-            text: institution.toUpperCase(),
-            style: 'header',
-            alignment: 'center',
-            margin: [0, 20, 0, 0],
-          },
-          logoRight,
-        ],
-      },
 
+  const docDefinition: TDocumentDefinitions = {
+    
+    // Aqui se manda a llamar al dictionary de estilos que se definen arriba 
+    //styles: styles,
+    //pageMargins: [20,20,20,20],
+
+    // Aqui el header
+    header: headerSection({ showLogo: true }),     
+    
+    // Aqui va todo el contenido del reporte
+    content: [                 
       {
         text: 'CONSTANCIA DE ESTUDIOS',
         style: 'subheader',
@@ -82,12 +99,8 @@ export const getConstanciaConLogotipos = (body: any) => {
       { text: institution, bold: true },
       { text: '_____________________________', margin: [0, 20, 0, 5] },
       { text: 'Firma del responsable', italics: true },
-    ],
-    styles: {
-      header: { fontSize: 16, bold: true },
-      subheader: { fontSize: 14, bold: true },
-      bold: { bold: true },
-    },
+    ],    
+    
   };
 
   return docDefinition;
