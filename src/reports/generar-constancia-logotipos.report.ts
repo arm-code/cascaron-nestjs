@@ -34,9 +34,19 @@ const logoRight: Content = {
 
 // }
 
-export const getConstanciaConLogotipos = (body: any) => {
+export const getConstanciaConLogotipos = () => {
   
-  const { studentName, studentID, program, institution, date } = body;
+  const { studentName, studentID, program, institution, date } = {
+    studentName: 'Juan Pérez',
+    studentID: '123456789',
+    program: 'Ingeniería en Sistemas',
+    institution: 'Instituto Tecnológico de Ejemplo',
+    date: new Date().toLocaleDateString('es-MX', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+  };
 
   const docDefinition: TDocumentDefinitions = {
     

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { BasicReportsService } from './basic-reports.service';
 import { Response } from 'express';
 
@@ -17,17 +17,15 @@ export class BasicReportsController {
     pdfDoc.end();
   }
 
-  @Post('constancia-logotipos')
-  async generarConstanciaConLogotipos(
-    @Body() body: any,
-    @Res() response: Response
+  @Get('constancia-logotipos/:matricula')
+  async generarConstanciaConLogotipos(    
+    @Res() response: Response,
+    @Param('matricula') matricula: string,
   ) {
-    const pdfDoc = this.basicReportsService.constanciaEstudianteLogotipos(body);
+    const pdfDoc = this.basicReportsService.constanciaEstudianteLogotipos( matricula );
     response.setHeader('Content-Type', 'application/pdf');
     pdfDoc.info.Title = 'Hola mundo';
     pdfDoc.pipe(response);
     pdfDoc.end();
-
-    
   }
 }

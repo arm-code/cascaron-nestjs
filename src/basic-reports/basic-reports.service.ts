@@ -16,8 +16,8 @@ export class BasicReportsService {
         return doc 
     }
 
-    constanciaEstudianteLogotipos( body: any ){
-        const docDefinition = getConstanciaConLogotipos(body);
+    constanciaEstudianteLogotipos( matricula: string ){
+        const docDefinition = getConstanciaConLogotipos();
         const doc = this.printerService.createPdf(docDefinition)
         return doc 
     }
