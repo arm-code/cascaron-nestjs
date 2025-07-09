@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConsultaService } from 'src/estudiantes/consulta/consulta.service';
 import { PrinterService } from 'src/printer/printer.service';
 import { getHelloWorldReport } from 'src/reports';
+import { getCountries } from 'src/reports/countries.report';
 import { getConstanciaConLogotipos } from 'src/reports/generar-constancia-logotipos.report';
 
 @Injectable()
@@ -30,4 +31,11 @@ export class BasicReportsService {
         const doc = this.printerService.createPdf(docDefinition)
         return doc 
     }
+
+    async getCountryReport(){
+        const docDefinition = getCountries();
+        return this.printerService.createPdf(docDefinition)
+        
+    }
+
 }
