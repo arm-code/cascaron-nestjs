@@ -1,7 +1,19 @@
 import { TDocumentDefinitions } from "pdfmake/interfaces"
 import { headerSection } from "./sections/header.section"
+import { Country } from "src/countries/entities/countries.entity";
 
-export const getCountries = (): TDocumentDefinitions => {
+
+interface ReportOptions {
+    title?: string,
+    subTitle?: string,
+    countries: Country[]
+}
+
+export const getCountries = ( opcions: ReportOptions ): TDocumentDefinitions => {
+
+const { title, subTitle, countries } = opcions;
+console.log(countries);
+
     return {
         pageOrientation: 'landscape',
         header: headerSection({
@@ -14,11 +26,18 @@ export const getCountries = (): TDocumentDefinitions => {
                 layout: 'lightHorizontalLines',
                 table: {
                     headerRows: 1,
-                    widths: ['*', 'auto', 100, '*'],
+                    widths: [50, 50, 50, '*', 'auto', '*'],
                     body: [
-                        ['First Name', 'Last Name', 'Country', 'City'],
-                        ['Value 1', 'Value 2', 'Value 3', 'Value 4'],
-                        [{ text: 'Value 5', italics: true }, 'Value 6', 'Value 7', 'Value 8'],
+                        ['Id', 'Iso2', 'Iso3', 'Name', 'Continent', 'Local Name'],
+                        ...countries.map( country => [
+                            country.id,
+                            country.iso2,
+                            country.iso3,
+                            { text: country.name, bold: true},
+                            country.continent,
+                            country.localName || 'N/A'
+                        ])
+                        
                     ]
                 }
             }

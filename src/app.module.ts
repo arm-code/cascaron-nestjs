@@ -15,6 +15,7 @@ import { MessageWsModule } from './message-ws/message-ws.module';
 import { PrinterModule } from './printer/printer.module';
 import { BasicReportsModule } from './basic-reports/basic-reports.module';
 import { ConsultaModule } from './estudiantes/consulta/consulta.module';
+import { CountriesModule } from './countries/countries.module';
 
 
 @Module({
@@ -45,6 +46,7 @@ import { ConsultaModule } from './estudiantes/consulta/consulta.module';
     PrinterModule,
     BasicReportsModule,
     ConsultaModule,
+    CountriesModule,
   ],
   controllers: [ SybaseController],
   providers: [],
