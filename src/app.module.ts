@@ -16,6 +16,7 @@ import { PrinterModule } from './printer/printer.module';
 import { BasicReportsModule } from './basic-reports/basic-reports.module';
 import { ConsultaModule } from './estudiantes/consulta/consulta.module';
 import { CountriesModule } from './countries/countries.module';
+import { StoreReportsModule } from './store-reports/store-reports.module';
 
 
 @Module({
@@ -47,6 +48,7 @@ import { CountriesModule } from './countries/countries.module';
     BasicReportsModule,
     ConsultaModule,
     CountriesModule,
+    StoreReportsModule,
   ],
   controllers: [ SybaseController],
   providers: [],
