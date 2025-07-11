@@ -1,14 +1,20 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Country } from 'src/countries/entities/countries.entity';
 import { ConsultaService } from 'src/estudiantes/consulta/consulta.service';
 import { PrinterService } from 'src/printer/printer.service';
 import { getHelloWorldReport } from 'src/reports';
+import { getCountries } from 'src/reports/countries.report';
 import { getConstanciaConLogotipos } from 'src/reports/generar-constancia-logotipos.report';
+import { IsNull, Not, Repository } from 'typeorm';
 
 @Injectable()
 export class BasicReportsService {
     constructor(
         private readonly printerService: PrinterService,
-        private readonly consultaService: ConsultaService, // Assuming you have a service to fetch student data
+        private readonly consultaService: ConsultaService,
+        @InjectRepository(Country) 
+        private readonly countryRepository: Repository<Country>
     ){}
 
     
@@ -30,4 +36,17 @@ export class BasicReportsService {
         const doc = this.printerService.createPdf(docDefinition)
         return doc 
     }
+
+    async getCountryReport(){
+        const countries = await this.countryRepository.find({
+            where: {
+                localName: Not(IsNull())
+            }
+        });
+        
+        const docDefinition = getCountries({ countries });
+        return this.printerService.createPdf(docDefinition)
+        
+    }
+
 }

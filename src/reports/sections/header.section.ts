@@ -1,17 +1,19 @@
 import { Content } from 'pdfmake/interfaces';
 
 
-const logoRight: Content = {
+const logoLeft: Content = {
   image: 'src/assets/images/sed.png',
   width: 150,
-    alignment: 'right',
+  alignment: 'left',
+  margin: [20, 20, 0, 0],
 };
 
 
-const logoLeft: Content = {
+const logoRight: Content = {
   image: 'src/assets/images/spayt-png.png',
   width: 80,
-  alignment: 'left',
+  margin: [0, 20, 20, 0],
+  alignment: 'right',
 };
 
 
@@ -34,11 +36,37 @@ export const headerSection = (options: HeaderOptions): Content => {
     margin: [0, 0, 20, 0],
   } : '';
 
+  const headerSubTitle: Content  = subTitle ? {
+    text: subTitle,
+    alignment: 'center',
+    margin: [0, 5, 0, 0],
+    style: {
+      fontSize: 14,
+      bold: true,
+    },
+  } : '';
+
+  const headerTitle: Content = title ? {
+    stack: [
+      {
+        text: title,
+        alignment: 'center',
+        margin: [0, 15, 0, 0],
+        style: {
+          bold: true,
+          fontSize: 22,
+        }
+      },
+      headerSubTitle
+    ]
+  } : '';
+
   return {
     columns: [
+      logoLeft,      
+      headerTitle,
       logoRight,
-      headerDate,
-      logoLeft,
+      
     ],
   };
 };
