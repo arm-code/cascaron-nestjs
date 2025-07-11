@@ -1,6 +1,7 @@
 import { TDocumentDefinitions } from "pdfmake/interfaces"
 import { headerSection } from "./sections/header.section"
 import { Country } from "src/countries/entities/countries.entity";
+import { footerSection } from "./sections/footer.section";
 
 
 interface ReportOptions {
@@ -9,9 +10,9 @@ interface ReportOptions {
     countries: Country[]
 }
 
-export const getCountries = ( opcions: ReportOptions ): TDocumentDefinitions => {
+export const getCountries = ( options: ReportOptions ): TDocumentDefinitions => {
 
-const { title, subTitle, countries } = opcions;
+const { title, subTitle, countries } = options;
 console.log(countries);
 
     return {
@@ -20,6 +21,7 @@ console.log(countries);
             title: 'Countries Report',
             subTitle: 'A report on various countries',            
         }),
+        footer: footerSection,
         pageMargins: [40, 100, 40, 60],
         content: [
             {
@@ -38,6 +40,39 @@ console.log(countries);
                             country.localName || 'N/A'
                         ])
                         
+                    ]
+                }
+            },
+
+            {
+                text: `Totals`,
+                alignment: 'left',
+                margin: [0, 20, 20, 0],
+                fontSize: 12,
+                color: '#333',
+                bold: true
+            },
+            {
+                layout: 'noBorders',
+                table: {
+                    headerRows: 1,
+                    widths: [50, 50, 50, '*', 'auto', '*'],
+                    body: [
+                        [
+                            {
+                                text: 'Total countries',
+                                colSpan: 3,
+                                bold: true
+                            },
+                            {},
+                            {},
+                            {
+                                text: countries.length.toString(),                                
+                                bold: true
+                            },
+                            {},
+                            {}
+                        ]
                     ]
                 }
             }
